@@ -24,10 +24,11 @@ namespace SpellFilterApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Spell>>> GetSpells()
         {
-          if (_context.Spells == null)
-          {
-              return NotFound();
-          }
+            if (_context.Spells == null)
+            {
+                return NotFound();
+            }
+
             return await _context.Spells.ToListAsync();
         }
 
@@ -35,12 +36,12 @@ namespace SpellFilterApi.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Spell>> GetSpell(Guid id)
         {
-          if (_context.Spells == null)
-          {
-              return NotFound();
-          }
-            var spell = await _context.Spells.FindAsync(id);
+            if (_context.Spells == null)
+            {
+                return NotFound();
+            }
 
+            var spell = await _context.Spells.FindAsync(id);
             if (spell == null)
             {
                 return NotFound();
@@ -54,10 +55,13 @@ namespace SpellFilterApi.Controllers
         [HttpPost]
         public async Task<ActionResult<Spell>> PostSpell(Spell spell)
         {
-          if (_context.Spells == null)
-          {
-              return Problem("Entity set 'SpellFilterContext.Spells'  is null.");
-          }
+            return NotFound();
+        
+            if (_context.Spells == null)
+            {
+                return Problem("Entity set 'SpellFilterContext.Spells'  is null.");
+            }
+            
             _context.Spells.Add(spell);
             await _context.SaveChangesAsync();
 
@@ -69,13 +73,14 @@ namespace SpellFilterApi.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutSpell(Guid id, Spell spell)
         {
+            return NotFound();
+
             if (id != spell.Id)
             {
                 return BadRequest();
             }
 
             _context.Entry(spell).State = EntityState.Modified;
-
             try
             {
                 await _context.SaveChangesAsync();
@@ -99,10 +104,13 @@ namespace SpellFilterApi.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteSpell(Guid id)
         {
+            return NotFound();
+            
             if (_context.Spells == null)
             {
                 return NotFound();
             }
+
             var spell = await _context.Spells.FindAsync(id);
             if (spell == null)
             {
